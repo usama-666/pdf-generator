@@ -1,5 +1,6 @@
 const express = require("express");
 const puppeteer = require("puppeteer");
+const serverless = require("serverless-http");
 const path = require("path");
 const ejs = require("ejs");
 const fs = require("fs");
@@ -45,3 +46,5 @@ app.get("/gen-pdf", async (req, res) => {
     }
 });
 app.listen(port, console.log("localhost listening on port " + port));
+
+module.exports.handler = serverless(app);
