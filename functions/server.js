@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 app.get("/gen-pdf", async (req, res) => {
     console.log("inside rew");
     try {
-        const templatePath = path.join(__dirname, "medication.ejs");
+        const templatePath = path.join(__dirname, "../medication.ejs");
         fs.readFile(templatePath, "utf-8", async (err, template) => {
             if (err) {
                 res.status(500).json({ message: "Error reading template" });
