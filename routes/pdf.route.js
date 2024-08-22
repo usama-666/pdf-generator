@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const puppeteer = require("puppeteer-core");
+const puppeteer = require("puppeteer");
 const chromium = require("chrome-aws-lambda");
 const router = express.Router();
 const fs = require("fs");
@@ -20,13 +20,14 @@ router.route("/gen-pdf").get(async function (req, res) {
 
     try {
         const browser = await puppeteer.launch({
-            args: chromium.args,
-            executablePath: await chromium.executablePath,
-            headless: chromium.headless,
-            timeout: 0,
+            headless: true,
         });
 
-        let urlLocal = `http://localhost:4000/api/load`;
+        // args: chromium.args,
+        // executablePath: await chromium.executablePath,
+        // headless: chromium.headless,
+        // timeout: 0,
+        let urlLocal = `${req.protocol}://${req.hostname}/api/load`;
         const page = await browser.newPage();
         await page.goto(urlLocal, { waitUntil: "networkidle2" });
         const pdf = await page.pdf({ format: "A4" });

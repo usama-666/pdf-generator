@@ -11,13 +11,12 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
-        "@sparticuz/chromium": "^127.0.0",
         "chrome-aws-lambda": "^10.1.0",
         "ejs": "^3.1.10",
         "express": "^4.19.2",
         "path": "^0.12.7",
         "puppeteer": "^23.1.1",
-        "puppeteer-core": "^10.1.0",
+        "puppeteer-core": "^23.1.1",
         "serverless-http": "^3.2.0"
     },
     "devDependencies": {
