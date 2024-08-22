@@ -27,14 +27,16 @@ router.route("/gen-pdf").get(async function (req, res) {
     const filePath = path.join(__dirname, "Medication.pdf");
     console.log(filePath);
     // const html = ejs.render(template);
-    browser = await chromium.puppeteer.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath,
-        headless: chromium.headless,
-        ignoreHTTPSErrors: true,
-    });
+    // browser = await chromium.puppeteer.launch({
+    //     args: chromium.args,
+    //     defaultViewport: chromium.defaultViewport,
+    //     executablePath: await chromium.executablePath,
+    //     headless: chromium.headless,
+    //     ignoreHTTPSErrors: true,
+    // });
     // const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+
+    const browser = await puppeteer.launch();
 
     const page = await browser.newPage();
 
