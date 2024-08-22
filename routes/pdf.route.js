@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
+const chromium = require("chrome-aws-lambda");
 const router = express.Router();
 const fs = require("fs");
 
@@ -26,7 +27,14 @@ router.route("/gen-pdf").get(async function (req, res) {
     const filePath = path.join(__dirname, "Medication.pdf");
     console.log(filePath);
     // const html = ejs.render(template);
-    const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+    browser = await chromium.puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true,
+    });
+    // const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 
     const page = await browser.newPage();
 
