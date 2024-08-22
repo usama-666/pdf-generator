@@ -38,9 +38,15 @@ router.route("/gen-pdf").get(async function (req, res) {
 
     const page = await browser.newPage();
 
-    await page.goto("http://localhost:4000/api/load", {
+    // await page.goto("http://localhost:4000/api/load", {
+    //     waitUntil: "networkidle2",
+    // });
+
+    console.log(`${req.protocol}://${req.hostname}/api/load`);
+    await page.goto(`${req.protocol}://${req.hostname}/api/load`, {
         waitUntil: "networkidle2",
     });
+
     // await page.setContent(html, { waitUntil: "networkidle0" });
     await page.pdf({ path: filePath, format: "A4" });
 
