@@ -20,12 +20,12 @@ router.route("/gen-pdf").get(async function (req, res) {
     try {
         const browser = await puppeteer.launch({
             headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            executablePath:
+                process.env.CHROME_EXECUTABLE_PATH ||
+                "/usr/bin/chromium-browser", // Update this path if necessary
         });
 
-        // args: chromium.args,
-        // executablePath: await chromium.executablePath,
-        // headless: chromium.headless,
-        // timeout: 0,
         let urlLocal = `${req.protocol}://${req.hostname}/api/load`;
         const page = await browser.newPage();
         await page.goto(urlLocal, { waitUntil: "networkidle2" });
